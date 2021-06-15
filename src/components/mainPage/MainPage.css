@@ -1,0 +1,16 @@
+.main-page {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: space-between;
+    padding-top: 20px;
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}

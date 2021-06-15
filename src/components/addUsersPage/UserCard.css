@@ -1,0 +1,12 @@
+.user-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    color: orange;
+    width: 94%;
+    opacity: 0.95;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 2px;
+}

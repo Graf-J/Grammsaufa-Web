@@ -5,7 +5,7 @@ import './Generator.css';
 function Generator({ number, setNumber, min, setMin, max, setMax }) {
     const [color, setColor] = useState('#222');
 
-    const onButtonClick = (e) => {
+    const handleButtonClick = (e) => {
         setNumber(Math.floor(Math.random() * (max - min) + min));
     }
 
@@ -31,7 +31,7 @@ function Generator({ number, setNumber, min, setMin, max, setMax }) {
     return (
         <div className="generator">
             <TextField label="Min" className="limiter" value={ min } onChange={ (e) => setMin(e.target.value)} />
-            <div style={ rnd_button } aria-haspopup="true" onClick={ onButtonClick } onTouchStart={ onTouchStart } onTouchEnd={ onTouchEnd }>
+            <div style={ rnd_button } className='rnd-button' aria-haspopup="true" onClick={ handleButtonClick } onTouchStart={ onTouchStart } onTouchEnd={ onTouchEnd }>
                 <h1>{ number }</h1>
             </div>
             <TextField label="Max" className="limiter" value={ max } onChange={ (e) => setMax(e.target.value) } />
