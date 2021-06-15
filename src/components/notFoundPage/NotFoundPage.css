@@ -1,0 +1,15 @@
+.not-found-page {
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.not-found-page h1 {
+    font-size: 2rem;
+}
+
+.go-back {
+    font-size: 3rem;
+}
