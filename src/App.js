@@ -1,13 +1,24 @@
 import './App.css';
-import MainPage from './components/MainPage';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import MainPage from './components/mainPage/MainPage';
+import AddUsersPage from './components/addUsersPage/AddUsersPage';
+import InfoPage from './components/infoPage/InfoPage';
+import NotFoundPage from './components/notFoundPage/NotFoundPage';
 
 function App() {
   return (
-    <div className="App">
-      <div className="container">
-        <MainPage />
+    <Router>
+      <div className="App">
+        <div className="container">
+          <Switch>
+            <Route path='/' exact component={ MainPage } />
+            <Route path='/add-users' component={ AddUsersPage } />
+            <Route path='/info/:user' component={ InfoPage } />
+            <Route path='*' component={ NotFoundPage } />
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
