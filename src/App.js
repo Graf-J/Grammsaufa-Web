@@ -27,7 +27,7 @@ function App() {
       <div className="App">
         <div className="container">
           <Switch>
-            <Route path='/' exact component={ MainPage } />
+            <Route path='/' exact component={ () => <MainPage users={ users } /> } />
             <Route path='/add-users' component={ () => <AddUsersPage users={ users } addUser={ addUser } removeUser={ removeUser } /> } />
             <Route path='/info' exact component={ InfoPage } />
             <Route path='/info/:user' component={ UserInfoPage } />

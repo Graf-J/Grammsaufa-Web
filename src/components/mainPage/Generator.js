@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import './Generator.css';
 
-function Generator({ number, setNumber, min, setMin, max, setMax }) {
+function Generator({ generateRound }) {
     const [color, setColor] = useState('#222');
+    const [min, setMin] = useState(30);
+    const [max, setMax] = useState(200);
+    const [number, setNumber] = useState('Click');
+
+    useEffect(() => {
+        console.log('Moni');
+    }, [])
 
     const handleButtonClick = (e) => {
-        setNumber(Math.floor(Math.random() * (max - min) + min));
+        const rndNumber = Math.floor(Math.random() * (max - min) + min);
+        setNumber(rndNumber);
+        generateRound(rndNumber);
     }
 
     const onTouchStart = (e) => {

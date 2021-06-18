@@ -1,0 +1,28 @@
+.input-matrix-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-section {
+    display: flex;
+    justify-content: space-around;
+    width: 85%;
+}
+
+.input-section-wrapper {
+    display: flex;
+}
+
+.expectation-wrapper {
+    width: 15%;
+    padding: 2px;
+}
+
+.expectation {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 5px;
+}

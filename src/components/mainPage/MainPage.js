@@ -5,12 +5,13 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import Generator from './Generator';
+import InputMatrix from './InputMatrix';
+import Round from '../../models/Round';
 import './MainPage.css';
 
-function MainPage() {
-    const [number, setNumber] = useState('Click');
-    const [min, setMin] = useState(30);
-    const [max, setMax] = useState(200);
+function MainPage({ users }) {
+
+    const [rounds, setRounds] = useState([]);
 
     const history = useHistory();
 
@@ -26,15 +27,27 @@ function MainPage() {
         history.push('/add-users');
     }
 
+    const generateRound = (expectation) => {
+        let values = new Array(users.length).fill(0);
+        let today = new Date();
+        let timestamp = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let round = new Round(values, expectation, timestamp);
+        if (rounds.length !== 0) {
+            round.id = rounds[0].id + 1;
+        }
+        setRounds(prevRounds => [round, ...prevRounds]);
+        // Modify Users
+        users.forEach(user => {
+            user.weights.push(0);
+        })
+    }
+
     return (
         <div className='main-page'>
-            <Generator 
-                number={ number } 
-                setNumber={ setNumber }
-                min={ min } 
-                setMin={ setMin }
-                max={ max } 
-                setMax={ setMax } />
+            <Generator generateRound={ generateRound } />
+            <div className='input-matrix-wrapper'>
+                <InputMatrix users={ users } rounds={ rounds } setRounds={ setRounds } />
+            </div>
             <div className='button-wrapper'>
                 <Fab color="primary" onClick={ handleInfoClick }>
                     <FormatListNumberedIcon />
