@@ -1,6 +1,8 @@
 .input-matrix-body {
     display: flex;
     flex-direction: column;
+    height: 90%;
+    overflow-y: scroll;
 }
 
 .input-section {

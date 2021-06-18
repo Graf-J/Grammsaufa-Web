@@ -6,7 +6,6 @@ export default function evaluateMatrix(users, rounds) {
         let valuesArr = round.values;
         applyValues(users, valuesArr)
     })
-    console.log(users);
     return users;
 }
 

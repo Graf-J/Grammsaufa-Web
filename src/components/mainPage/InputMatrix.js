@@ -1,6 +1,7 @@
 import React from 'react';
 import InputMatrixHeader from './InputMatrixHeader';
 import InputMatrixBody from './InputMatrixBody';
+import './InputMatrix.css';
 
 function InputMatrix({ users, setUsers, rounds, setRounds }) {
     return (

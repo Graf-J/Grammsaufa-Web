@@ -32,7 +32,6 @@ function MainPage() {
     }, [])
 
     useEffect(() => {
-        console.log('Setting Users');
         setLocalUsers(JSON.stringify(users));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [users])
@@ -86,7 +85,7 @@ function MainPage() {
 
     return (
         <div className='main-page'>
-            <Generator generateRound={ generateRound } calculateScores={ calculateScores } rounds={ rounds } />
+            <Generator generateRound={ generateRound } calculateScores={ calculateScores } users={ users } rounds={ rounds } />
             <div className='input-matrix-wrapper'>
                 <InputMatrix users={ users } setUsers={ setUsers } rounds={ rounds } setRounds={ setRounds } />
             </div>

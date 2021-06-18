@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import './Generator.css';
 
-function Generator({ generateRound, calculateScores, rounds }) {
+function Generator({ generateRound, calculateScores, users, rounds }) {
     const [color, setColor] = useState('#222');
     const [min, setMin] = useState(30);
     const [max, setMax] = useState(200);
     const [number, setNumber] = useState('Click');
+
+    const history = useHistory();
 
     useEffect(() => {
         if (rounds.length !== 0) {
@@ -18,11 +21,16 @@ function Generator({ generateRound, calculateScores, rounds }) {
     }, [rounds])
 
     const handleButtonClick = (e) => {
-        const rndNumber = Math.floor(Math.random() * (max - min) + min);
-        setNumber(rndNumber);
-        generateRound(rndNumber);
-        if (rounds.length !== 0) {
-            calculateScores();
+        if (users.length !== 0) {
+            const rndNumber = Math.floor(Math.random() * (max - min) + min);
+            setNumber(rndNumber);
+            generateRound(rndNumber);
+            if (rounds.length !== 0) {
+                calculateScores();
+            }
+        }
+        else {
+            history.push('/add-users');
         }
     }
 

@@ -47,6 +47,7 @@ function AddUsersPage() {
                 newUser.id = users[users.length - 1].id + 1;
             }
             setUsers(prevUsers => [...prevUsers, newUser]);
+            setInputValue('');
         }
     }
 
@@ -64,7 +65,7 @@ function AddUsersPage() {
                     <h1>Add Players:</h1>
                 </div>
                 <div className='input-wrapper'>
-                    <TextField className='user-input' label="Player Name" variant="filled" onChange={ handleInputChange } />
+                    <TextField className='user-input' value={ inputValue } label="Player Name" variant="filled" onChange={ handleInputChange } />
                     <Fab color="primary" onClick={ handleAddUserClick }>
                         <AddIcon />
                     </Fab>
