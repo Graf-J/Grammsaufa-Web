@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
@@ -6,21 +6,47 @@ import AddIcon from '@material-ui/icons/Add';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import Generator from './Generator';
 import InputMatrix from './InputMatrix';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import Round from '../../models/Round';
 import './MainPage.css';
 
-function MainPage({ users }) {
+function MainPage() {
 
+    const [users, setUsers] = useState([]);
     const [rounds, setRounds] = useState([]);
 
+    const [localUsers, setLocalUsers] = useLocalStorage('users', '');
+    const [localRounds, setLocalRounds] = useLocalStorage('rounds', '');
+
     const history = useHistory();
+
+    useEffect(() => {
+        if (localUsers.length > 2) {
+            setUsers(JSON.parse(localUsers));
+        }
+        if (localRounds.length > 2) {
+            setRounds(JSON.parse(localRounds));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    useEffect(() => {
+        setLocalUsers(JSON.stringify(users));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [users])
+
+    useEffect(() => {
+        setLocalRounds(JSON.stringify(rounds));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [rounds])
 
     const handleInfoClick = () => {
         history.push('/info')
     }
 
     const handleRestartGameClick = () => {
-        console.log('Restart Game');
+        setRounds([]);
+        setLocalRounds('');
     }
 
     const handleAddUsersClick = () => {
@@ -44,9 +70,9 @@ function MainPage({ users }) {
 
     return (
         <div className='main-page'>
-            <Generator generateRound={ generateRound } />
+            <Generator generateRound={ generateRound } rounds={ rounds } />
             <div className='input-matrix-wrapper'>
-                <InputMatrix users={ users } rounds={ rounds } setRounds={ setRounds } />
+                <InputMatrix users={ users } setUsers={ setUsers } rounds={ rounds } setRounds={ setRounds } />
             </div>
             <div className='button-wrapper'>
                 <Fab color="primary" onClick={ handleInfoClick }>

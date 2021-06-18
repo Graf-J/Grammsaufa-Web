@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import './Generator.css';
 
-function Generator({ generateRound }) {
+function Generator({ generateRound, rounds }) {
     const [color, setColor] = useState('#222');
     const [min, setMin] = useState(30);
     const [max, setMax] = useState(200);
     const [number, setNumber] = useState('Click');
 
     useEffect(() => {
-        console.log('Moni');
-    }, [])
+        if (rounds.length !== 0) {
+            setNumber(rounds[0].expectation);
+        }
+        else {
+            setNumber('Click');
+        }
+    }, [rounds])
 
     const handleButtonClick = (e) => {
         const rndNumber = Math.floor(Math.random() * (max - min) + min);

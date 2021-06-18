@@ -5,14 +5,14 @@ import './UserCard.css';
 
 function UserCard({ user, removeUser }) {
 
-    const handleRemoveUser = () => {
+    const handleRemoveUserClick = () => {
         removeUser(user);
     }
 
     return (
         <div className='user-card'>
             <h1>{ user.name }</h1>
-            <IconButton aria-label="delete" color='secondary' onClick={ handleRemoveUser }>
+            <IconButton aria-label="delete" color='secondary' onClick={ handleRemoveUserClick }>
                 <DeleteIcon />
             </IconButton>
         </div>

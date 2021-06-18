@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -6,14 +6,30 @@ import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import UserCard from './UserCard';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import User from '../../models/User';
 import './AddUsersPage.css';
 
-function AddUsersPage({ users, addUser, removeUser }) {
+function AddUsersPage() {
 
     const [inputValue, setInputValue] = useState('');
+    const [users, setUsers] = useState([]);
+
+    const [localUsers, setLocalUsers] = useLocalStorage('users', '');
 
     const history = useHistory();
+
+    useEffect(() => {
+        if (localUsers.length > 2) {
+            setUsers(JSON.parse(localUsers));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    useEffect(() => {
+        setLocalUsers(JSON.stringify(users));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [users])
 
     const handleBackClick = () => {
         history.push('/');
@@ -25,8 +41,17 @@ function AddUsersPage({ users, addUser, removeUser }) {
 
     const handleAddUserClick = () => {
         if (inputValue.length !== 0) {
-            addUser(new User(inputValue));
+            let newUser = new User(inputValue);
+            // Increase User.ID depending on the ID of the last User in the List
+            if (users.length !== 0) {
+                newUser.id = users[users.length - 1].id + 1;
+            }
+            setUsers(prevUsers => [...prevUsers, newUser]);
         }
+    }
+
+    const removeUser = (user) => {
+      setUsers(users.filter(curUser => user.id !== curUser.id))
     }
 
     return (
