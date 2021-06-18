@@ -10,3 +10,10 @@
     padding: 8px;
     margin: 2px;
 }
+
+.user-name-wrapper {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -11,7 +11,9 @@ function UserCard({ user, removeUser }) {
 
     return (
         <div className='user-card'>
-            <h1>{ user.name }</h1>
+            <div className='user-name-wrapper'>
+                <h1>{ user.name }</h1>
+            </div>
             <IconButton aria-label="delete" color='secondary' onClick={ handleRemoveUserClick }>
                 <DeleteIcon />
             </IconButton>

@@ -44,11 +44,11 @@ function Generator({ generateRound, rounds }) {
 
     return (
         <div className="generator">
-            <TextField label="Min" className="limiter" value={ min } onChange={ (e) => setMin(e.target.value)} />
+            <TextField label="Min" className="limiter" value={ min } inputProps={{min: 0, style: { textAlign: 'center' }}} onChange={ (e) => setMin(e.target.value)} />
             <div style={ rnd_button } className='rnd-button' aria-haspopup="true" onClick={ handleButtonClick } onTouchStart={ onTouchStart } onTouchEnd={ onTouchEnd }>
                 <h1>{ number }</h1>
             </div>
-            <TextField label="Max" className="limiter" value={ max } onChange={ (e) => setMax(e.target.value) } />
+            <TextField label="Max" className="limiter" value={ max } inputProps={{min: 0, style: { textAlign: 'center' }}} onChange={ (e) => setMax(e.target.value) } />
         </div>
     )
 }
