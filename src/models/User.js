@@ -5,7 +5,7 @@ export default class User {
         this.id = 0;
         this.points = [];
         this.totalPoints = 0;
-        this.weights = [0];
+        this.weights = [];
         this.totalWeight = 0;
     }
 

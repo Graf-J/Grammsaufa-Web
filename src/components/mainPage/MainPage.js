@@ -6,6 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import Generator from './Generator';
 import InputMatrix from './InputMatrix';
+import evaluateMatrix from '../../services/evaluateMatrix';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import Round from '../../models/Round';
 import './MainPage.css';
@@ -31,6 +32,7 @@ function MainPage() {
     }, [])
 
     useEffect(() => {
+        console.log('Setting Users');
         setLocalUsers(JSON.stringify(users));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [users])
@@ -46,7 +48,14 @@ function MainPage() {
 
     const handleRestartGameClick = () => {
         setRounds([]);
-        setLocalRounds('');
+        let newUsers = [...users];
+        newUsers.forEach(user => {
+            user.points = [];
+            user.totalPoints = 0;
+            user.weights = [];
+            user.totalWeight = 0;
+        })
+        setUsers(newUsers);
     }
 
     const handleAddUsersClick = () => {
@@ -63,14 +72,21 @@ function MainPage() {
         }
         setRounds(prevRounds => [round, ...prevRounds]);
         // Modify Users
-        users.forEach(user => {
+        let newUsers = [...users];
+        newUsers.forEach(user => {
             user.weights.push(0);
         })
+        setUsers(newUsers);
+    }
+
+    const calculateScores = () => {
+        let newUsers = evaluateMatrix([...users], [...rounds]);
+        setUsers(newUsers);
     }
 
     return (
         <div className='main-page'>
-            <Generator generateRound={ generateRound } rounds={ rounds } />
+            <Generator generateRound={ generateRound } calculateScores={ calculateScores } rounds={ rounds } />
             <div className='input-matrix-wrapper'>
                 <InputMatrix users={ users } setUsers={ setUsers } rounds={ rounds } setRounds={ setRounds } />
             </div>
