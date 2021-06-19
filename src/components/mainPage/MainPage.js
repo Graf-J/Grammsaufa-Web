@@ -6,6 +6,8 @@ import AddIcon from '@material-ui/icons/Add';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import Generator from './Generator';
 import InputMatrix from './InputMatrix';
+import RestartModal from './RestartModal';
+import AddUsersModal from './AddUsersModal';
 import evaluateMatrix from '../../services/evaluateMatrix';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import Round from '../../models/Round';
@@ -15,6 +17,9 @@ function MainPage() {
 
     const [users, setUsers] = useState([]);
     const [rounds, setRounds] = useState([]);
+
+    const [restartModalOpen, setRestartModalOpen] = useState(false);
+    const [addUsersModalOpen, setAddUsersModalOpen] = useState(false);
 
     const [localUsers, setLocalUsers] = useLocalStorage('users', '');
     const [localRounds, setLocalRounds] = useLocalStorage('rounds', '');
@@ -45,7 +50,25 @@ function MainPage() {
         history.push('/info')
     }
 
+    const closeAddUsersModal = () => {
+        setAddUsersModalOpen(false);
+    }
+
+    const navigateToUsersPage = () => {
+        history.push('/add-users');
+    }
+
     const handleRestartGameClick = () => {
+        if (rounds.length !== 0) {
+            setRestartModalOpen(true);
+        }
+    }
+
+    const closeRestartModal = () => {
+        setRestartModalOpen(false);
+    }
+
+    const restartGame = () => {
         setRounds([]);
         let newUsers = [...users];
         newUsers.forEach(user => {
@@ -58,7 +81,12 @@ function MainPage() {
     }
 
     const handleAddUsersClick = () => {
-        history.push('/add-users');
+        if (rounds.length === 0) {
+            history.push('/add-users');
+        }
+        else {
+            setAddUsersModalOpen(true);
+        }
     }
 
     const generateRound = (expectation) => {
@@ -100,6 +128,8 @@ function MainPage() {
                     <AddIcon />
                 </Fab>
             </div>
+            <RestartModal restartModalOpen={ restartModalOpen } closeRestartModal={ closeRestartModal } restartGame={ restartGame } />
+            <AddUsersModal addUsersModalOpen={ addUsersModalOpen } closeAddUsersModal={ closeAddUsersModal } restartGame={ restartGame } navigateToUsersPage={ navigateToUsersPage } />
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainPage from './components/mainPage/MainPage';
@@ -8,6 +8,11 @@ import UserInfoPage from './components/userInfoPage/UserInfoPage';
 import NotFoundPage from './components/notFoundPage/NotFoundPage';
 
 function App() {
+
+  useEffect(() => {
+    console.log('Wenn du das hier liest, hast du ab jetzt 1 Minute Zeit dein Bier zu exen 🍺🍺🍺');
+  }, [])
+
   return (
     <Router>
       <div className="App">
