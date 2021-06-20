@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import './Generator.css';
 
 function Generator({ generateRound, calculateScores, users, rounds }) {
@@ -11,6 +12,14 @@ function Generator({ generateRound, calculateScores, users, rounds }) {
 
     const history = useHistory();
 
+    const [edgeValues, setEdgeValues] = useLocalStorage('edgeValues', '');
+
+    useEffect(() => {
+        setMin(JSON.parse(edgeValues).min);
+        setMax(JSON.parse(edgeValues).max);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     useEffect(() => {
         if (rounds.length !== 0) {
             setNumber(rounds[0].expectation);
@@ -19,6 +28,11 @@ function Generator({ generateRound, calculateScores, users, rounds }) {
             setNumber('Click');
         }
     }, [rounds])
+
+    useEffect(() => {
+        setEdgeValues(JSON.stringify({ min, max }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [min, max])
 
     const handleButtonClick = (e) => {
         if (users.length !== 0) {
