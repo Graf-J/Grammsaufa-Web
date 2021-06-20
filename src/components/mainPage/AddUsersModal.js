@@ -10,7 +10,7 @@ function AddUsersModal({ addUsersModalOpen, closeAddUsersModal, restartGame, nav
         closeAddUsersModal();
         setTimeout(() => {
             navigateToUsersPage();
-        }, 300);
+        }, 100);
     }
 
     const handleAbortClick = () => {

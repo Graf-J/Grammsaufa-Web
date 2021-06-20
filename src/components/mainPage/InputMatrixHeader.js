@@ -4,7 +4,7 @@ import './InputMatrixHeader.css';
 function InputMatrixHeader({ users }) {
     let nameTag = {
         // Get the optimal width of a NameTag
-        width: `${ (280 + (window.innerWidth / 2)) / users.length }px `,
+        width: `${ (window.innerWidth * 0.85) / users.length }px`,
         textAlign: 'center'
     }
 
