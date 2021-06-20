@@ -15,8 +15,10 @@ function Generator({ generateRound, calculateScores, users, rounds }) {
     const [edgeValues, setEdgeValues] = useLocalStorage('edgeValues', '');
 
     useEffect(() => {
-        setMin(JSON.parse(edgeValues).min);
-        setMax(JSON.parse(edgeValues).max);
+        if (edgeValues.length > 2) {
+            setMin(JSON.parse(edgeValues).min);
+            setMax(JSON.parse(edgeValues).max);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
