@@ -29,6 +29,7 @@ function MainPage() {
     useEffect(() => {
         if (localUsers.length > 2) {
             setUsers(JSON.parse(localUsers));
+            console.log(users);
         }
         if (localRounds.length > 2) {
             setRounds(JSON.parse(localRounds));

@@ -38,7 +38,9 @@ function Generator({ generateRound, calculateScores, users, rounds }) {
 
     const handleButtonClick = (e) => {
         if (users.length !== 0) {
-            const rndNumber = Math.floor(Math.random() * (max - min) + min);
+            const minNumber = parseInt(min);
+            const maxNumber = parseInt(max);
+            const rndNumber = Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
             setNumber(rndNumber);
             generateRound(rndNumber);
             if (rounds.length !== 0) {
